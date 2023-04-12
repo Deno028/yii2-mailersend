@@ -1,0 +1,21 @@
+{
+    "name": "zizi/yii2-mailersend",
+    "description": "Yii2 Extension for Mailersend",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thanh Lam",
+            "email": "thanh@zizi.au"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "zizi\\mailersend\\": ""
+        }
+    }
+}
