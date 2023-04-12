@@ -1,8 +1,11 @@
 {
-    "name": "zizi/yii2-mailersend",
+    "name": "deno028/yii2-mailersend",
     "description": "Yii2 Extension for Mailersend",
     "type": "yii2-extension",
-    "keywords": ["yii2","extension"],
+    "keywords": [
+        "yii2",
+        "extension"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -11,11 +14,30 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "~2.0.0"
+        "yiisoft/yii2": ">=2.0.4",
+        "php-http/guzzle7-adapter": "^1.0",
+        "nyholm/psr7": "^1.6",
+        "mailersend/mailersend": "^0.9.1"
     },
+    "config": {
+        "process-timeout": 1800,
+        "fxp-asset": {
+            "enabled": false
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "php-http/discovery": true
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "autoload": {
         "psr-4": {
-            "zizi\\mailersend\\": ""
+            "deno028\\mailersend\\": ""
         }
     }
 }
