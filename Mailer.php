@@ -11,7 +11,7 @@ use yii\mail\BaseMailer;
 
 
 /**
- * Mailer implements a mailer based on Mailgun.
+ * Mailer implements a mailer based on MailerSend.
  *
  * To use Mailer, you should configure it in the application configuration like the following,
  *
@@ -38,7 +38,7 @@ use yii\mail\BaseMailer;
  */
 class Mailer extends BaseMailer
 {
-    public $messageClass = Message::class;
+    public $messageClass = "yii\swiftmailer\Message";
 
     public $key;
 
@@ -64,21 +64,35 @@ class Mailer extends BaseMailer
     {
         Yii::info('Sending email', __METHOD__);
 
-        $recipients = [
-            new Recipient('your@client.com', 'Your Client'),
-        ];
+        foreach ($message->getTo() as $k => $v) {
+            $recipients = [
+                new Recipient($k, $v)
+            ];
+        }
 
-        var_dump($message);
+        $from = '';
+        $fromName = '';
+        foreach ($message->getFrom() as $k => $v) {
+            $from = $k;
+            $fromName = $v;
+        }
+
+        $replyTo = '';
+        $replyToName = '';
+        foreach ($message->getReplyTo() as $k => $v) {
+            $replyTo = $k;
+            $replyToName = $v;
+        }
 
         $emailParams = (new EmailParams())
-            ->setFrom('your@domain.com')
-            ->setFromName('Your Name')
+            ->setFrom($from)
+            ->setFromName($fromName)
             ->setRecipients($recipients)
-            ->setSubject('Subject')
-            ->setHtml('This is the HTML content')
-            ->setText('This is the text content')
-            ->setReplyTo('reply to')
-            ->setReplyToName('reply to name');
+            ->setSubject($message->getSubject())
+            ->setHtml($message->toString())
+            ->setText($message->toString())
+            ->setReplyTo($replyTo)
+            ->setReplyToName($replyToName);
 
         return $this->getMailerSend()->email->send($emailParams);
     }
