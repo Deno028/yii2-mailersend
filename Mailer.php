@@ -77,11 +77,11 @@ class Mailer extends BaseMailer
             $fromName = $v;
         }
 
-        $replyTo = '';
-        $replyToName = '';
-        foreach ($message->getReplyTo() as $k => $v) {
-            $replyTo = $k;
-            $replyToName = $v;
+        if (is_array($message->getReplyTo())) {
+            foreach ($message->getReplyTo() as $k => $v) {
+                $replyTo = $k;
+                $replyToName = $v;
+            }
         }
 
         $emailParams = (new EmailParams())
