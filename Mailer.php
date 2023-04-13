@@ -77,6 +77,8 @@ class Mailer extends BaseMailer
             $fromName = $v;
         }
 
+        $replyTo = '';
+        $replyToName = '';
         if (is_array($message->getReplyTo())) {
             foreach ($message->getReplyTo() as $k => $v) {
                 $replyTo = $k;
