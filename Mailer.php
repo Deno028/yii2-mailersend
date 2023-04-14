@@ -38,7 +38,7 @@ use yii\mail\BaseMailer;
  */
 class Mailer extends BaseMailer
 {
-    public $messageClass = "yii\swiftmailer\Message";
+    public $messageClass = Message::class;
 
     public $key;
 
@@ -86,13 +86,14 @@ class Mailer extends BaseMailer
             }
         }
 
+
         $emailParams = (new EmailParams())
             ->setFrom($from)
             ->setFromName($fromName)
             ->setRecipients($recipients)
             ->setSubject($message->getSubject())
-            ->setHtml($message->toString())
-            ->setText($message->toString())
+            ->setHtml($message->getHtmlBody())
+            ->setText($message->getTextBody())
             ->setReplyTo($replyTo)
             ->setReplyToName($replyToName);
 
